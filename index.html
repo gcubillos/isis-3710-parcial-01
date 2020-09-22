@@ -58,25 +58,51 @@
     <!-- Menú de navegación -->
     <!-- TODO: Cambiar colores navbar -->
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      
-
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#burger">Burgers</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#taco">Tacos</a>
-          </li>
+          <a class="nav-link" href="#taco">Tacos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Salads</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Desserts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Drinks & Sides</a>
+        </li>
       </ul>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Salads</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Desserts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Drinks & Sides</a>
-      </li>
     </nav>
+    <!-- Parte en donde se muestran los productos-->
+    <!-- Categoría del producto -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Se incluye el id para referenciarlo luego en el JS -->
+        <div class="col"><h2 id="titulo-seccion"></h2></div>
+      </div>
+    </div>
+    <!-- Productos asociados -->
+    <div class="container-fluid">
+      <div class="row" id="productos-asociados">
+        <div class="col">
+            <!-- Ejemplo de card -->
+            <!-- 
+          <div class="card" style="width: 18rem">
+            <img class="card-img-top" src="..." alt="Card image cap" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
   </body>
 </html>
