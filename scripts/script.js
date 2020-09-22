@@ -24,3 +24,13 @@ pedirJSON(urlDatos).then(
     jsonDatos = JSON.parse(response);
     console.log(jsonDatos)
 })
+// Agregar eventlisteners a los distintos botones
+console.log(document.getElementsByTagName("a"));
+let navegacionCategorias = document.getElementsByClassName("nav-item");
+for (let i = 0; i < navegacionCategorias.length; i++) {
+    navegacionCategorias[i].addEventListener("click",
+    function(){
+        document.getElementById("titulo-seccion").textContent = navegacionCategorias[i].textContent
+    });
+    
+}
