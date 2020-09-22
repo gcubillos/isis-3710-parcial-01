@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Referencia al JS-->
     <script src="scripts/script.js" defer></script>
     <!--Referencia a Bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <!--Referencia a CSS propio-->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css" />
     <!--Agregar font-->
-    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet"> 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
     <title>Parcial 1 Gabriel Cubillos Bolivar</title>
-</head>
-<body>
+  </head>
+  <!-- Contenido página -->
+  <!-- TODO: Agregar líneas separación secciones -->
+  <body>
+    <!--Encabezado página-->
     <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-10"><h1>Restaurant & Lounge</h1></div>
-                <div class="col-1"><img src="images/shopping-cart.png" class="img-fluid"></div>
-                <!--TODO: Referenciar el item counter-->
-                <div class="col-1" id="item-counter"></div>
-            </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-10"><h1>Restaurant & Lounge</h1></div>
+          <div class="col-1">
+            <img
+              src="images/shopping-cart.png"
+              class="img-fluid"
+              alt="Imagen carro compras"
+            />
+          </div>
+          <!--TODO: Referenciar el item counter-->
+          <div class="col-1" id="item-counter"></div>
         </div>
-        </header>
-    
-    
-</body>
+      </div>
+    </header>
+    <!-- Contenido de principal de la página -->
+    <!-- Imagen principal -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <!-- TODO: Agrandar imagen -->
+          <img
+            src="images/hamburger-central.png"
+            alt="Imagen hamburguesa"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- Menú de navegación -->
+    <!-- TODO: Cambiar colores navbar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#burger">Burgers</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#taco">Tacos</a>
+          </li>
+      </ul>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Salads</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Desserts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Drinks & Sides</a>
+      </li>
+    </nav>
+  </body>
 </html>
