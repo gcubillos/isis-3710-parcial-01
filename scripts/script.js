@@ -25,12 +25,36 @@ pedirJSON(urlDatos).then(
     console.log(jsonDatos)
 })
 // Agregar eventlisteners a los distintos botones
-console.log(document.getElementsByTagName("a"));
 let navegacionCategorias = document.getElementsByClassName("nav-item");
 for (let i = 0; i < navegacionCategorias.length; i++) {
     navegacionCategorias[i].addEventListener("click",
     function(){
+        // Cambiar el título de la sección
         document.getElementById("titulo-seccion").textContent = navegacionCategorias[i].textContent
+        // Obtener índice del elemento
+        // TODO: Revisar 
+        let indiceElemento = navegacionCategorias[i].localName
+        // Agregar los elementos a los cards
+        let rowCards = document.getElementById("productos-asociados");
+        // Iterar sobre los distintos elementos
+        console.log(jsonDatos[indiceElemento])
+        /*for (let j = 0; j < jsonDatos.length; j++) {
+            const element = jsonDatos[j];
+            
+        }*/
+        // Crear la columna con el div
+        let divCol = document.createElement("div")
+        // Se realiza con col-3 para que queden 4 productos cuando se muestre en la página
+        divCol.classList.add("col-3")
+        // Creación de la card
+        let divCard = document.createElement("div")
+        divCard.classList.add("card")
+
+        // Imagen correspondiente a la tarjeta
+        let imCard = document.createElement("img")
+        imCard.classList.add("card-img-top")
+        imCard.src = ""
+
     });
     
 }
