@@ -1,5 +1,5 @@
 p{
-    font-family: 'Satisfy', cursive;
+    
 }
 
 h1{
@@ -8,4 +8,13 @@ h1{
 
 h2{
     text-align: center;
+}
+
+/* Titulos de cards */
+h5{
+    font-weight: bold;
+}
+
+.precio{
+    font-weight: bold;
 }

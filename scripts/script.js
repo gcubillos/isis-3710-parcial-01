@@ -28,26 +28,16 @@ pedirJSON(urlDatos).then(
 // Agregar eventlisteners a los distintos botones de categorias
 let navegacionCategorias = document.getElementsByClassName("nav-item");
 for (let i = 0; i < navegacionCategorias.length; i++) {
-    navegacionCategorias[i].addEventListener("click",
-        function () {
-            // Cambiar el título de la sección
-            document.getElementById("titulo-seccion").textContent = navegacionCategorias[i].textContent
-            // Obtener índice del elemento
-            // TODO: Revisar como obtener el índice de los datos
-            let indiceElemento = navegacionCategorias[i].localName
-            // Agregar los elementos a los cards
-            let rowCards = document.getElementById("productos-asociados");
-            // TODO: Iterar sobre los distintos elementos
-            console.log(jsonDatos[indiceElemento])
-            /*for (let j = 0; j < jsonDatos.length; j++) {
-                const element = jsonDatos[j];
-                
-            }*/
-            /*// Se planea dejar una card no visible para utilizarla como template
-            let colCard = document.getElementById("card-template");
-            let card = colCard;
-            console.log(card.replaceChild(,div))*/
-
+    navegacionCategorias[i].addEventListener("click", mostrarCategoria => {
+        // Cambiar el título de la sección
+        document.getElementById("titulo-seccion").textContent = navegacionCategorias[i].textContent
+        // Obtener índice del elemento
+        let indiceElemento = parseInt((navegacionCategorias[i].id).substring(4, (navegacionCategorias[i].id).length));
+        // Agregar los elementos a los cards
+        let rowCards = document.getElementById("productos-asociados");
+        console.log()
+        // Se asume que siempre se utiliza el key de products
+        for (let j = 0; j < jsonDatos[indiceElemento].products.length; j++) {
             // Crear la columna con el div
             let divCol = document.createElement("div")
             // Se realiza con col-3 para que queden 4 productos cuando se muestre en la página
@@ -62,9 +52,10 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             let imCard = document.createElement("img")
             imCard.classList.add("card-img-top")
             // Ruta de la imagen a la tarjeta
-            imCard.src = "";
+            // TODO: Estandarizar el tamaño de las fotos
+            imCard.src = jsonDatos[indiceElemento].products[j].image;
             // Texto alternativo por si no sale la imagen
-            imCard.alt = "";
+            imCard.alt = jsonDatos[indiceElemento].products[j].name;
             // Agregar como hijo de la card
             divCard.appendChild(imCard);
 
@@ -77,8 +68,7 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             // Creación del título de la card
             let cardTitle = document.createElement("h5");
             cardTitle.classList.add("card-title");
-            // TODO: Agregar texto del título
-            let textoTitle = document.createTextNode("");
+            let textoTitle = document.createTextNode(jsonDatos[indiceElemento].products[j].name);
             cardTitle.appendChild(textoTitle);
             // Agregar como hijo del cuerpo
             divBody.appendChild(cardTitle)
@@ -86,13 +76,19 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             // Creación del cuerpo de la card
             let cardText = document.createElement("p");
             cardText.classList.add("card-text")
-            // TODO: Agregar texto de la card
-            let textoCard = document.createTextNode("");
+            let textoCard = document.createTextNode(jsonDatos[indiceElemento].products[j].description);
             cardText.appendChild(textoCard);
             // Agregar como hijo del cuerpo
             divBody.appendChild(cardText)
 
-            // Creación del botón de carro de compras
+            // Texto precio
+            let pPrecio = document.createElement("p");
+            pPrecio.classList.add("precio");
+            let textoPrecio = document.createTextNode("$"+jsonDatos[indiceElemento].products[j].price);
+            pPrecio.appendChild(textoPrecio)
+            cardText.appendChild(pPrecio)
+
+            // Creación del botón de agregar carro de compras
             let butCarroCompras = document.createElement("a");
             // Agregar estilo de Bootstrap
             butCarroCompras.classList.add("btn");
@@ -108,13 +104,15 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
                 let numItemsCarro = Number.parseInt(document.getElementById("num-items").innerText);
 
             })
-
             // Agregar card al body
             rowCards.appendChild(divCol);
+        }
 
 
 
-        });
+
+
+    });
 
 }
 
@@ -136,7 +134,7 @@ butCarroCompras.addEventListener("click", resumenDePedido => {
     // Se crean los headers uno por uno
     // Array con los titulos de los headers
     let titulosHeaders = Array("Item", "Qty.", "Description", "Unit Price", "Amount");
-    console.log(typeof(titulosHeaders))
+    console.log(typeof (titulosHeaders))
     for (let i = 0; i < titulosHeaders.length; i++) {
         let th = document.createElement("th");
         let textoHeader = document.createTextNode(titulosHeaders[i]);
@@ -157,3 +155,5 @@ butCarroCompras.addEventListener("click", resumenDePedido => {
 
 
 })
+
+// TODO: Evitar que se sobrepongan los elementos al refrescar la página
