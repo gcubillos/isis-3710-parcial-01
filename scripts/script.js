@@ -32,7 +32,7 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         // Cambiar el título de la sección
         document.getElementById("titulo-seccion").textContent = navegacionCategorias[i].textContent
         // Obtener índice del elemento
-        // TODO: Revisar 
+        // TODO: Revisar como obtener el índice de los datos
         let indiceElemento = navegacionCategorias[i].localName
         // Agregar los elementos a los cards
         let rowCards = document.getElementById("productos-asociados");
@@ -42,6 +42,11 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             const element = jsonDatos[j];
             
         }*/
+        /*// Se planea dejar una card no visible para utilizarla como template
+        let colCard = document.getElementById("card-template");
+        let card = colCard;
+        console.log(card.replaceChild(,div))*/
+
         // Crear la columna con el div
         let divCol = document.createElement("div")
         // Se realiza con col-3 para que queden 4 productos cuando se muestre en la página
@@ -53,7 +58,26 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         // Imagen correspondiente a la tarjeta
         let imCard = document.createElement("img")
         imCard.classList.add("card-img-top")
-        imCard.src = ""
+        // Ruta de la imagen a la tarjeta
+        imCard.src = "";
+        // Texto alternativo por si no sale la imagen
+        imCard.alt ="";
+
+        // Creación del cuerpo de la card
+        let divBody = document.createElement("div");
+        divBody.classList.add("card-body")
+
+        // Creación del título de la card
+        let cardTitle = document.createElement("h5");
+        cardTitle.classList.add("card-title");
+        // TODO: Agregar texto del título
+        let textoTitle = document.createTextNode("");
+        cardTitle.appendChild(textoTitle);
+
+        // Creación del cuerpo de la card
+        let cardText = document.createElement("p");
+        
+
 
     });
     
