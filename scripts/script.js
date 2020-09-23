@@ -54,6 +54,8 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         // Creación de la card
         let divCard = document.createElement("div")
         divCard.classList.add("card")
+        // Agregar como hijo de la columna
+        divCol.appendChild(divCard);
 
         // Imagen correspondiente a la tarjeta
         let imCard = document.createElement("img")
@@ -62,10 +64,14 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         imCard.src = "";
         // Texto alternativo por si no sale la imagen
         imCard.alt ="";
+        // Agregar como hijo de la card
+        divCard.appendChild(imCard);
 
         // Creación del cuerpo de la card
         let divBody = document.createElement("div");
         divBody.classList.add("card-body")
+        // Agregar como hijo de la card
+        divCard.appendChild(divBody);
 
         // Creación del título de la card
         let cardTitle = document.createElement("h5");
@@ -73,10 +79,39 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         // TODO: Agregar texto del título
         let textoTitle = document.createTextNode("");
         cardTitle.appendChild(textoTitle);
+        // Agregar como hijo del cuerpo
+        divBody.appendChild(cardTitle)
 
         // Creación del cuerpo de la card
         let cardText = document.createElement("p");
-        
+        cardText.classList.add("card-text")
+        // TODO: Agregar texto de la card
+        let textoCard = document.createTextNode("");
+        cardText.appendChild(textoCard);
+        // Agregar como hijo del cuerpo
+        divBody.appendChild(cardText)
+
+        // Creación del botón de carro de compras
+        let butCarroCompras = document.createElement("a");
+        // Agregar estilo de Bootstrap
+        butCarroCompras.classList.add("btn");
+        butCarroCompras.classList.add("btn-primary")
+        // Texto del botón
+        let textButCarro = document.createTextNode("Add to car");
+        butCarroCompras.appendChild(textButCarro);
+        // Agregar como hijo del cuerpo
+        divBody.appendChild(butCarroCompras)
+        // Agregar listener por si se da clic
+        butCarroCompras.addEventListener("click", agregarACarro =>
+        {
+            // TODO: Cambiar el número que se muestra
+            let numItemsCarro = Number.parseInt(document.getElementById("num-items").innerText);
+
+        })
+
+        // Agregar card al body
+        rowCards.appendChild(divCol);
+
 
 
     });
