@@ -91,25 +91,82 @@
     </div>
     <!-- Productos asociados -->
     <div class="container-fluid">
-      <div class="row" id="productos-asociados">
-        <!-- Ejemplo de card 
-        <div class="col-3" id="card-template">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="" />
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text"></p>
-              <a class="btn btn-primary" id="btn-carro-compras"></a>
-            </div>
-          </div>
-        </div> -->
-      </div>
+      <div class="row" id="productos-asociados"></div>
       <div class="row" id="resumen-orden"></div>
+      <div class="row">
+        <div class="col-9" id="total-orden"></div>
+        <div class="col-3 botones-orden">
+          <button
+            type="button"
+            class="btn btn-danger"
+            id="but-cancel"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Cancel
+          </button>
+          <button type="button" class="btn btn-light" id="but-confirm">
+            Confirm order
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal de confirmación -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cancel the order</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Are you sure about cancelling the order?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-light"
+              data-dismiss="modal"
+              id="cancel-order"
+            >
+              Yes, I want to cancel the order
+            </button>
+            <button type="button" class="btn btn-danger">No, I want to continue adding products</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Footer de la página -->
     <footer>
-      <!-- TODO: Agregar estilo correcto. Centrar-->
-      <p>Contact us: +57 3102105253 - info@restaurant.com - @restaurant</p>
+      <p class="contact">Contact us: +57 3102105253 - info@restaurant.com - @restaurant</p>
     </footer>
+    <!-- Scripts Bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

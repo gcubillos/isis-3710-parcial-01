@@ -18,3 +18,11 @@ h5{
 .precio{
     font-weight: bold;
 }
+
+.botones-orden{
+    display: none;
+}
+.contact{
+    text-align: center;
+    font-weight: bold;
+}

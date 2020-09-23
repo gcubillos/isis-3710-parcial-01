@@ -89,10 +89,10 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             cardText.appendChild(pPrecio)
 
             // Creación del botón de agregar carro de compras
-            let butCarroCompras = document.createElement("a");
+            let butCarroCompras = document.createElement("button");
             // Agregar estilo de Bootstrap
             butCarroCompras.classList.add("btn");
-            butCarroCompras.classList.add("btn-primary")
+            butCarroCompras.classList.add("btn-secondary")
             // Texto del botón
             let textButCarro = document.createTextNode("Add to car");
             butCarroCompras.appendChild(textButCarro);
@@ -100,35 +100,35 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             divBody.appendChild(butCarroCompras)
             // Agregar listener por si se da clic
             butCarroCompras.addEventListener("click", agregarACarro => {
+                let quantity = 0;
                 // Actualizar información carro
                 if (informacionCarroCompras.length === 0) {
-                    informacionCarroCompras = [{ qty: 1, description: textoTitle.textContent, unitPrice: textoPrecio.textContent.substring(1,textoPrecio.length), amount: textoPrecio.textContent.substring(1,textoPrecio.length) }]
+                    informacionCarroCompras = [{ item: 1, quantity: 1, description: textoTitle.textContent, unitPrice: jsonDatos[indiceElemento].products[j].price }]
+                    quantity = 1;
                 }
                 else if (informacionCarroCompras.length > 0) {
                     // Actualizar datos si ya se cuenta con un producto en el carro
                     let seEncuentra = false;
                     // Buscar si ya hay un producto con la descripción
-                    console.log(informacionCarroCompras[0].description);
                     // TODO: Mirar agregar condición para seEncuentra
                     for (let k = 0; k < informacionCarroCompras.length; k++) {
                         if (informacionCarroCompras[k].description === textoTitle.textContent) {
-                            informacionCarroCompras[k].qty++;
-                            informacionCarroCompras[k].amount = informacionCarroCompras[k].qty * parseFloat((informacionCarroCompras[k].unitPrice).substring(1,(informacionCarroCompras[k].unitPrice).length));
+                            informacionCarroCompras[k].quantity++;
                             seEncuentra = true;
                         }
+                        quantity += informacionCarroCompras[k].quantity;
                     }
                     // Si no hay producto agregarlo
-                    if(!seEncuentra)
-                    {
-                        let objetoAgregar = { qty: 1, description: textoTitle.textContent, unitPrice: textoPrecio.textContent.substring(1,textoPrecio.length), amount: textoPrecio.textContent };
+                    if (!seEncuentra) {
+                        let objetoAgregar = { item: informacionCarroCompras.length + 1, quantity: 1, description: textoTitle.textContent, unitPrice: jsonDatos[indiceElemento].products[j].price };
                         informacionCarroCompras.push(objetoAgregar);
+                        quantity+=1;
                     }
 
-                    
+
                 }
-                console.log(informacionCarroCompras)
                 // Actualizar número mostrado en pantalla
-                document.getElementById("num-items").innerText = informacionCarroCompras.length + " items";
+                document.getElementById("num-items").innerText = quantity + " items";
 
             })
             // Agregar card al body
@@ -170,14 +170,39 @@ butCarroCompras.addEventListener("click", resumenDePedido => {
     }
     // Crear body de la tabla
     let bodyTabla = tablaResumen.createTBody();
-    let rowBody = bodyTabla.insertRow();
-    let datoBody = rowBody.insertCell();
-    //TODO: Mostrar información del pedido
-    //TODO: Total del pedido
-    //TODO: Botones del pedido
+    // Variable en donde se va a guardar el total amount
+    let totalAmount = 0;
+    // Agregar información del pedido
+    for (let l = 0; l < informacionCarroCompras.length; l++) {
+        let rowBody = bodyTabla.insertRow();
+        for (let key of Object.keys(informacionCarroCompras[l])) {
+            let datoBody = rowBody.insertCell();
+            let textoBody = document.createTextNode(informacionCarroCompras[l][key])
+            datoBody.appendChild(textoBody);
 
+        }
+        // Crear amount
+        let datoBody = rowBody.insertCell();
+        let textoBody = document.createTextNode(informacionCarroCompras[l].unitPrice * informacionCarroCompras[l].quantity)
+        totalAmount += informacionCarroCompras[l].unitPrice * informacionCarroCompras[l].quantity
+        datoBody.appendChild(textoBody);
+    }
     // Agregar tabla a contenido principal
     document.getElementById("resumen-orden").appendChild(tablaResumen);
+    // Mostrar el total del pedido
+    let pTotalPedido = document.createElement('p');
+    // TODO: Round number
+    let textoTotalPedido = document.createTextNode("Total: $" + totalAmount);
+    pTotalPedido.appendChild(textoTotalPedido);
+    document.getElementById("total-orden").appendChild(pTotalPedido);
+    // Mostrar botones
+    for (let but of document.getElementsByClassName("botones-orden")) { but.style.display = "inline" };
+    document.getElementById("cancel-order").addEventListener("click", quitarTodo => {
+        informacionCarroCompras = [];
+    })
+    document.getElementById("but-confirm").addEventListener("click", mostrarEnConsola => {
+        console.log(informacionCarroCompras)
+    })
 
 
 })
