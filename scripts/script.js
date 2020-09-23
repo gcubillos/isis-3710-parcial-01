@@ -3,6 +3,8 @@ let urlDatos = "https://gist.githubusercontent.com/josejbocanegra/9a28c356416bad
 
 // Variable en la que se van a guardar los datos
 let jsonDatos = '';
+// Variable en donde se va a guardar la información del carrito de compras
+let informacionCarroCompras = [];
 // Pedir datos y guardarlos como un json
 function pedirJSON(url) {
     return new Promise((response, rej) => {
@@ -22,7 +24,6 @@ function pedirJSON(url) {
 pedirJSON(urlDatos).then(
     function (response) {
         jsonDatos = JSON.parse(response);
-        console.log(jsonDatos)
     })
 
 // Agregar eventlisteners a los distintos botones de categorias
@@ -35,7 +36,6 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         let indiceElemento = parseInt((navegacionCategorias[i].id).substring(4, (navegacionCategorias[i].id).length));
         // Agregar los elementos a los cards
         let rowCards = document.getElementById("productos-asociados");
-        console.log()
         // Se asume que siempre se utiliza el key de products
         for (let j = 0; j < jsonDatos[indiceElemento].products.length; j++) {
             // Crear la columna con el div
@@ -84,7 +84,7 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             // Texto precio
             let pPrecio = document.createElement("p");
             pPrecio.classList.add("precio");
-            let textoPrecio = document.createTextNode("$"+jsonDatos[indiceElemento].products[j].price);
+            let textoPrecio = document.createTextNode("$" + jsonDatos[indiceElemento].products[j].price);
             pPrecio.appendChild(textoPrecio)
             cardText.appendChild(pPrecio)
 
@@ -100,8 +100,35 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
             divBody.appendChild(butCarroCompras)
             // Agregar listener por si se da clic
             butCarroCompras.addEventListener("click", agregarACarro => {
-                // TODO: Cambiar el número que se muestra
-                let numItemsCarro = Number.parseInt(document.getElementById("num-items").innerText);
+                // Actualizar información carro
+                if (informacionCarroCompras.length === 0) {
+                    informacionCarroCompras = [{ qty: 1, description: textoTitle.textContent, unitPrice: textoPrecio.textContent.substring(1,textoPrecio.length), amount: textoPrecio.textContent.substring(1,textoPrecio.length) }]
+                }
+                else if (informacionCarroCompras.length > 0) {
+                    // Actualizar datos si ya se cuenta con un producto en el carro
+                    let seEncuentra = false;
+                    // Buscar si ya hay un producto con la descripción
+                    console.log(informacionCarroCompras[0].description);
+                    // TODO: Mirar agregar condición para seEncuentra
+                    for (let k = 0; k < informacionCarroCompras.length; k++) {
+                        if (informacionCarroCompras[k].description === textoTitle.textContent) {
+                            informacionCarroCompras[k].qty++;
+                            informacionCarroCompras[k].amount = informacionCarroCompras[k].qty * parseFloat((informacionCarroCompras[k].unitPrice).substring(1,(informacionCarroCompras[k].unitPrice).length));
+                            seEncuentra = true;
+                        }
+                    }
+                    // Si no hay producto agregarlo
+                    if(!seEncuentra)
+                    {
+                        let objetoAgregar = { qty: 1, description: textoTitle.textContent, unitPrice: textoPrecio.textContent.substring(1,textoPrecio.length), amount: textoPrecio.textContent };
+                        informacionCarroCompras.push(objetoAgregar);
+                    }
+
+                    
+                }
+                console.log(informacionCarroCompras)
+                // Actualizar número mostrado en pantalla
+                document.getElementById("num-items").innerText = informacionCarroCompras.length + " items";
 
             })
             // Agregar card al body
@@ -134,7 +161,6 @@ butCarroCompras.addEventListener("click", resumenDePedido => {
     // Se crean los headers uno por uno
     // Array con los titulos de los headers
     let titulosHeaders = Array("Item", "Qty.", "Description", "Unit Price", "Amount");
-    console.log(typeof (titulosHeaders))
     for (let i = 0; i < titulosHeaders.length; i++) {
         let th = document.createElement("th");
         let textoHeader = document.createTextNode(titulosHeaders[i]);
