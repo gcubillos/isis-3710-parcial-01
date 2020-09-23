@@ -93,9 +93,11 @@
     <div class="container-fluid">
       <div class="row" id="productos-asociados"></div>
       <div class="row" id="resumen-orden"></div>
-      <div class="row">
-        <div class="col-9" id="total-orden"></div>
-        <div class="col-3 botones-orden">
+      <div class="row botones-orden" >
+        <div class="col-9">
+          <p id="total-orden"></p>
+        </div>
+        <div class="col-3">
           <button
             type="button"
             class="btn btn-danger"
@@ -143,7 +145,7 @@
             >
               Yes, I want to cancel the order
             </button>
-            <button type="button" class="btn btn-danger">No, I want to continue adding products</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">No, I want to continue adding products</button>
           </div>
         </div>
       </div>

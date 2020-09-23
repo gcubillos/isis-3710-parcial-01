@@ -36,6 +36,9 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
         let indiceElemento = parseInt((navegacionCategorias[i].id).substring(4, (navegacionCategorias[i].id).length));
         // Agregar los elementos a los cards
         let rowCards = document.getElementById("productos-asociados");
+        // Quitar contenido previo
+        rowCards.textContent = "";
+        document.getElementById("resumen-orden").textContent="";
         // Se asume que siempre se utiliza el key de products
         for (let j = 0; j < jsonDatos[indiceElemento].products.length; j++) {
             // Crear la columna con el div
@@ -122,7 +125,7 @@ for (let i = 0; i < navegacionCategorias.length; i++) {
                     if (!seEncuentra) {
                         let objetoAgregar = { item: informacionCarroCompras.length + 1, quantity: 1, description: textoTitle.textContent, unitPrice: jsonDatos[indiceElemento].products[j].price };
                         informacionCarroCompras.push(objetoAgregar);
-                        quantity+=1;
+                        quantity += 1;
                     }
 
 
@@ -148,6 +151,11 @@ let butCarroCompras = document.getElementById("carro-compras");
 butCarroCompras.addEventListener("click", resumenDePedido => {
     // Modificar el título de la sección
     document.getElementById("titulo-seccion").textContent = "Order detail";
+    // Esconder otra visualización
+    let rowCards = document.getElementById("productos-asociados");
+    rowCards.textContent = "";
+    document.getElementById("resumen-orden").textContent="";
+    for (let but of document.getElementsByClassName("botones-orden")) { but.style.display = "none" };
 
     // Crear tabla en donde se van a poner los elementos
     let tablaResumen = document.createElement("table");
@@ -190,15 +198,15 @@ butCarroCompras.addEventListener("click", resumenDePedido => {
     // Agregar tabla a contenido principal
     document.getElementById("resumen-orden").appendChild(tablaResumen);
     // Mostrar el total del pedido
-    let pTotalPedido = document.createElement('p');
     // TODO: Round number
-    let textoTotalPedido = document.createTextNode("Total: $" + totalAmount);
-    pTotalPedido.appendChild(textoTotalPedido);
-    document.getElementById("total-orden").appendChild(pTotalPedido);
+    let textoTotalPedido = "Total: $" + totalAmount;
+    document.getElementById("total-orden").innerText = textoTotalPedido;
     // Mostrar botones
-    for (let but of document.getElementsByClassName("botones-orden")) { but.style.display = "inline" };
+    for (let but of document.getElementsByClassName("botones-orden")) { but.style.display = "flex" };
     document.getElementById("cancel-order").addEventListener("click", quitarTodo => {
+        document.getElementById("total-orden").innerText = "Total: $" + totalAmount;
         informacionCarroCompras = [];
+        bodyTabla.textContent = "";
     })
     document.getElementById("but-confirm").addEventListener("click", mostrarEnConsola => {
         console.log(informacionCarroCompras)
